@@ -99,10 +99,6 @@ interface Validator {
     fun isValid(): Boolean
 }
 
-fun String.toURL(): String  {
-   return Day04::class.java.classLoader.getResource(this).file
-}
-
 enum class EyeColor {
     amb,
     blu,
