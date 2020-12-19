@@ -7,6 +7,7 @@ class Day04 {
 
     companion object {
 
+        @JvmStatic
         fun passportProcessing(validator : (Map<String, Any>) -> Validator) : Long {
 
             val splitter = Splitter.on(" ").withKeyValueSeparator(":")
@@ -107,8 +108,4 @@ enum class EyeColor {
     grn,
     hzl,
     oth
-}
-
-inline fun <reified T : Enum<T>> enumContains(name: String?): Boolean {
-    return enumValues<T>().any { it.name == name}
 }

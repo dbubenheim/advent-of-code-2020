@@ -30,7 +30,6 @@ class Day02 {
                 val character = split[1][0]
                 val password = split[2]
                 (password[positions[0].toInt() - 1] == character) xor (password[positions[1].toInt() -1] == character)
-
             }.size
         }
 

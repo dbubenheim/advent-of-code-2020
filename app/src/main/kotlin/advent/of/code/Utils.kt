@@ -1,8 +1,9 @@
 package advent.of.code
 
-class Utils {
+fun String.toURL(): String  {
+    return ClassLoader.getSystemResource(this).file
 }
 
-fun String.toURL(): String  {
-    return Day04::class.java.classLoader.getResource(this).file
+inline fun <reified T : Enum<T>> enumContains(name: String?): Boolean {
+    return enumValues<T>().any { it.name == name}
 }

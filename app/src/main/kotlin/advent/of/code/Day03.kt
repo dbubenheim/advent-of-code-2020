@@ -5,32 +5,19 @@ class Day03 {
     companion object {
 
         @JvmStatic
-        fun main(args: Array<String>) {
-            //println(tobbogganTrajectory())
-            println(tobbogganTrajectory(1, 1))
-            println(tobbogganTrajectory(3, 1))
-            println(tobbogganTrajectory(5, 1))
-            println(tobbogganTrajectory(7, 1))
-            println(tobbogganTrajectory(1, 2))
-            //println(tobbogganTrajectory())
-            println(tobbogganTrajectoryPart2())
-        }
-
-        @JvmStatic
         fun tobbogganTrajectoryPart2(): Long {
 
-            var sum = tobbogganTrajectory(1, 1)
-            sum *= tobbogganTrajectory(3, 1)
-            sum *= tobbogganTrajectory(5, 1)
-            sum *= tobbogganTrajectory(7, 1)
-            sum *= tobbogganTrajectory(1, 2)
+            var sum = tobbogganTrajectoryPart1(1, 1)
+            sum *= tobbogganTrajectoryPart1(3, 1)
+            sum *= tobbogganTrajectoryPart1(5, 1)
+            sum *= tobbogganTrajectoryPart1(7, 1)
+            sum *= tobbogganTrajectoryPart1(1, 2)
 
             return sum
         }
 
-
         @JvmStatic
-        fun tobbogganTrajectory(right: Int = 3, down: Int = 1): Long {
+        fun tobbogganTrajectoryPart1(right: Int = 3, down: Int = 1): Long {
 
             var count = 0L
             var y = 0
@@ -49,6 +36,16 @@ class Day03 {
             } while (y < MAX_Y)
 
             return count
+        }
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+            println(tobbogganTrajectoryPart1(1, 1))
+            println(tobbogganTrajectoryPart1(3, 1))
+            println(tobbogganTrajectoryPart1(5, 1))
+            println(tobbogganTrajectoryPart1(7, 1))
+            println(tobbogganTrajectoryPart1(1, 2))
+            println(tobbogganTrajectoryPart2())
         }
 
         private val REAL_INPUT = listOf(
