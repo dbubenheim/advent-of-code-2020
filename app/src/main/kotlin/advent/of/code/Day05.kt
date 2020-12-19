@@ -52,6 +52,7 @@ class Day05 {
 
         @JvmStatic
         fun main(args: Array<String>) {
+            
             println(decodeBoardingPass("FBFBBFFRLR"))
             println(decodeBoardingPass("BFFFBBFRRR"))
             println(decodeBoardingPass("FFFBBBFRRR"))
