@@ -7,6 +7,7 @@ class Day05 {
 
     companion object {
 
+        @JvmStatic
         fun binaryBoardingPart1(): Int {
             var max = 0
             File("day05/input-day05.txt".toURL()).forEachLine { line ->
@@ -16,6 +17,7 @@ class Day05 {
             return max
         }
 
+        @JvmStatic
         fun binaryBoardingPart2(): Int {
             val m = mutableSetOf<Int>()
             File("day05/input-day05.txt".toURL()).forEachLine { line ->
@@ -26,7 +28,8 @@ class Day05 {
             return minus.first()
         }
 
-        fun decodeBoardingPass(input: String): Int {
+        @JvmStatic
+        private fun decodeBoardingPass(input: String): Int {
 
             var rows = 0..127
             var seats = 0..7
@@ -52,12 +55,6 @@ class Day05 {
 
         @JvmStatic
         fun main(args: Array<String>) {
-
-            println(decodeBoardingPass("FBFBBFFRLR"))
-            println(decodeBoardingPass("BFFFBBFRRR"))
-            println(decodeBoardingPass("FFFBBBFRRR"))
-            println(decodeBoardingPass("BBFFBBFRLL"))
-
             println(binaryBoardingPart1())
             println(binaryBoardingPart2())
         }
