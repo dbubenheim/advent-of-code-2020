@@ -4,7 +4,7 @@ import advent.of.code.Day08.*
 import java.io.File
 
 class Day08 {
-
+    
     companion object {
 
         @JvmStatic
