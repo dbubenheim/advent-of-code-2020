@@ -3,7 +3,7 @@ package advent.of.code
 import advent.of.code.Day09.Companion.part1
 import advent.of.code.Day09.Companion.part2
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 internal class Day09Test {
 
