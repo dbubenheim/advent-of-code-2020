@@ -8,26 +8,26 @@ internal class Day11 {
     companion object {
 
         @JvmStatic
-        fun part1(): Int {
-            val seatLayout = File("day11/input-day11.txt".toURL()).readLines().toSeatLayout()
-            println(seatLayout.toString())
+        internal fun part1(): Int {
+            val seatLayout = File("day11/input-day11-2.txt".toURL()).readLines().toSeatLayout()
+            //println(seatLayout.toString())
 
             var rounds = 0
             var updated: Boolean
             do {
                 println("round: $rounds")
                 updated = seatLayout.update()
-                println(seatLayout.toString())
+                //println(seatLayout.toString())
                 rounds++
             } while (updated)
 
             println("total rounds: $rounds")
-            println(seatLayout.toString())
+            //println(seatLayout.toString())
             return seatLayout.occupiedSeats
         }
 
         @JvmStatic
-        fun part2(): Int {
+        internal fun part2(): Int {
             return 0
         }
 
@@ -62,69 +62,73 @@ class SeatLayout(input: List<String>) {
     val floorSeats
         get() = seats.flatten().count { it.isFloor() }
 
-    fun update(): Boolean {
+    internal fun update(): Boolean {
         var result = false
         seats.forEach { row ->
             row.forEach { seat ->
-                val updated = seat.update()
-                if (updated) result = true
+                seat.checkUpdate()
+                if (seat.needsUpdate()) result = true
+            }
+        }
+
+        seats.forEach { row ->
+            row.forEach { seat ->
+                seat.update()
             }
         }
         return result
     }
 
-    override fun toString() = seats.joinToString("\n") { it.toString() }
+    override fun toString() = seats.joinToString("\n") { it.joinToString(" ") }
 
     internal fun getUp(position: SeatPosition): Seat? {
         if (position.y == 0) return null
-        return seats[position.x][position.y - 1]
+        return seats[position.y - 1][position.x]
     }
 
     internal fun getUpRight(position: SeatPosition): Seat? {
-        if (position.x == seats.first().lastIndex) return null
-        return seats[position.x + 1][position.y]
+        if (position.x == seats.first().lastIndex || position.y == 0) return null
+        return seats[position.y - 1][position.x + 1]
     }
 
     internal fun getRight(position: SeatPosition): Seat? {
-        if (position.x == seats.first().lastIndex || position.y == seats.lastIndex) return null
-        return seats[position.x + 1][position.y + 1]
+        if (position.x == seats.first().lastIndex) return null
+        return seats[position.y][position.x + 1]
     }
 
     internal fun getDownRight(position: SeatPosition): Seat? {
-        if (position.x == seats.lastIndex || position.y == 0) return null
-        return seats[position.x + 1][position.y - 1]
+        if (position.x == seats.first().lastIndex || position.y == seats.lastIndex) return null
+        return seats[position.y + 1][position.x + 1]
     }
 
     internal fun getDown(position: SeatPosition): Seat? {
         if (position.y == seats.lastIndex) return null
-        return seats[position.x][position.y + 1]
+        return seats[position.y + 1][position.x]
     }
 
     internal fun getDownLeft(position: SeatPosition): Seat? {
         if (position.x == 0 || position.y == seats.lastIndex) return null
-        return seats[position.x - 1][position.y + 1]
+        return seats[position.y + 1][position.x - 1]
     }
 
     internal fun getLeft(position: SeatPosition): Seat? {
         if (position.x == 0) return null
-        return seats[position.x - 1][position.y]
+        return seats[position.y][position.x - 1]
     }
 
     internal fun getUpLeft(position: SeatPosition): Seat? {
         if (position.x == 0 || position.y == 0) return null
-        return seats[position.x - 1][position.y - 1]
+        return seats[position.y - 1][position.x - 1]
     }
 }
-
-//class Seats() : EnumSet<Seat> {
-//
-//}
 
 enum class SeatType(private val char: Char) {
 
     EMPTY('L'),
     FLOOR('.'),
     OCCUPIED('#');
+
+    override fun toString() = "$char"
 
     companion object {
         fun of(char: Char) = values().first { it.char == char }
@@ -156,11 +160,13 @@ internal class Seat(
     val upLeft: Seat?
         get() = layout.getUpLeft(this.position)
 
-    fun occupiedSeatsAround() = countOccupiedSeatsAround() > 0
+    var update : SeatUpdate? = null
 
-    fun noOccupiedSeatsAround() = !occupiedSeatsAround()
+    internal fun occupiedSeatsAround() = countOccupiedSeatsAround() > 0
 
-    fun countOccupiedSeatsAround(): Int {
+    internal fun noOccupiedSeatsAround() = !occupiedSeatsAround()
+
+    internal fun countOccupiedSeatsAround(): Int {
         var count = 0
         if (up?.isOccupied() == true) count++
         if (upRight?.isOccupied() == true) count++
@@ -173,29 +179,38 @@ internal class Seat(
         return count
     }
 
-    fun update(): Boolean {
-        var updated = false
+    internal fun checkUpdate() {
         when (this.type) {
             FLOOR -> doNothing()
             EMPTY -> if (noOccupiedSeatsAround()) {
-                this.type = OCCUPIED
-                updated = true
+                this.update = SeatUpdate(OCCUPIED)
             }
-            OCCUPIED -> if (countOccupiedSeatsAround() == 4) {
-                this.type = EMPTY
-                updated = true
+            OCCUPIED -> if (countOccupiedSeatsAround() >= 4) {
+                this.update = SeatUpdate(EMPTY)
             }
         }
-        return updated
     }
 
-    fun isOccupied() = this.type == OCCUPIED
-    fun isEmpty() = this.type == EMPTY
-    fun isFloor() = this.type == FLOOR
+    internal fun update() {
+        update?.let {
+            this.type = it.newType
+        }
+        update = null
+    }
 
-    override fun toString() = this.type.toString()
+    internal fun needsUpdate() = update != null
+
+    internal fun isOccupied() = this.type == OCCUPIED
+    internal fun isEmpty() = this.type == EMPTY
+    internal fun isFloor() = this.type == FLOOR
+
+    override fun toString() = this.type.toString() + "$position"
 
     private fun doNothing() {}
 }
 
-internal data class SeatPosition(val x: Int, val y: Int)
+data class SeatUpdate(val newType: SeatType)
+
+internal data class SeatPosition(val x: Int, val y: Int) {
+    override fun toString() = "(x=$x,y=$y)"
+}
