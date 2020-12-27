@@ -1,31 +1,34 @@
 package advent.of.code.day12
 
-class Position(
-    var north: Int,
-    var east: Int,
-    var south: Int,
-    var west: Int,
-) {
+import kotlin.math.abs
 
-    fun north(units: Units) {
-        this.north += units.units
-        this.south -= units.units
+class Position(var x: Int, var y: Int) {
+
+    fun north(units: Int) {
+        println("going north $units units")
+        this.y += units
+        println("new position: $this")
     }
 
-    fun east(units: Units) {
-        this.east += units.units
-        this.west -= units.units
+    fun east(units: Int) {
+        println("going east $units units")
+        this.x += units
+        println("new position: $this")
     }
 
-    fun south(units: Units) {
-        this.south += units.units
-        this.north -= units.units
+    fun south(units: Int) {
+        println("going south $units units")
+        this.y -= units
+        println("new position: $this")
     }
 
-    fun west(units: Units) {
-        this.west += units.units
-        this.east -= units.units
+    fun west(units: Int) {
+        println("going west $units units")
+        this.x -= units
+        println("new position: $this")
     }
 
-    override fun toString() = "($north,$east,$south,$west)"
+    fun toManhattanDistance() = abs(x) + abs(y)
+
+    override fun toString() = "($x,$y)"
 }

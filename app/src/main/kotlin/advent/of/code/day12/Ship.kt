@@ -5,20 +5,14 @@ import kotlin.math.abs
 class Ship(private val instructions: List<Instruction>) {
 
     var direction = Direction.EAST
-    var position : Position = Position(0,0,0,0)
+    var position = Position(0, 0)
 
     fun turn(degrees: Int) {
-        println("old direction $direction")
-        println("turning $degrees°")
-        val newDegrees =  direction.degrees + if (degrees > 0) degrees else abs(360 + degrees)
-        when(newDegrees % 360) {
-            // TODO Make me prettier
-            Direction.NORTH.degrees -> direction = Direction.NORTH
-            Direction.EAST.degrees -> direction = Direction.EAST
-            Direction.SOUTH.degrees -> direction = Direction.SOUTH
-            Direction.WEST.degrees -> direction = Direction.WEST
-        }
-        println("new direction $direction")
+        println("old direction: $direction")
+        println("turning: $degrees°")
+        val newDegrees =  (direction.degrees + if (degrees > 0) degrees else abs(360 + degrees)) % 360
+        direction = Direction.of(newDegrees)
+        println("new direction: $direction")
     }
 
     fun drive() {
@@ -37,8 +31,9 @@ class Ship(private val instructions: List<Instruction>) {
                         Direction.WEST -> this.position.west(it.units)
                     }
                 }
-                Action.LEFT -> this.turn(-it.units.units)
-                Action.RIGHT -> this.turn(it.units.units)
+
+                Action.LEFT -> this.turn(-it.units)
+                Action.RIGHT -> this.turn(it.units)
 
                 Action.NORTH -> this.position.north(it.units)
                 Action.EAST -> this.position.east(it.units)

@@ -2,7 +2,6 @@ package advent.of.code.day12
 
 import advent.of.code.toURL
 import java.io.File
-import kotlin.math.max
 
 class Day12 {
 
@@ -14,7 +13,7 @@ class Day12 {
             println("instructions: $instructions")
             val ship = Ship(instructions)
             ship.drive()
-            return max(ship.position.east, ship.position.west) + max(ship.position.north, ship.position.south)
+            return ship.position.toManhattanDistance()
         }
 
         @JvmStatic
@@ -23,7 +22,7 @@ class Day12 {
             println("instructions: $instructions")
             val ship = Ship(instructions)
             ship.drive()
-            return max(ship.position.east, ship.position.west) + max(ship.position.north, ship.position.south)
+            return ship.position.toManhattanDistance()
         }
 
         @JvmStatic
