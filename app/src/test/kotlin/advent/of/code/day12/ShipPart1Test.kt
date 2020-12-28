@@ -6,12 +6,12 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
-internal class ShipTest {
+internal class ShipPart1Test {
 
     @ParameterizedTest
     @MethodSource("provideInputForTestTurn")
     fun testTurn(degrees: Int, direction: Direction) {
-        val ship1 = Ship(emptyList())
+        val ship1 = ShipPart1(emptyList())
         ship1.turn(degrees)
         assertThat(ship1.direction).isEqualTo(direction)
     }
@@ -34,7 +34,7 @@ internal class ShipTest {
                 Arguments.of(-630, Direction.NORTH),
                 Arguments.of(-720, Direction.EAST),
                 Arguments.of(-1080, Direction.EAST),
-            );
+            )
         }
     }
 }

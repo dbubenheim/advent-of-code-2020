@@ -31,4 +31,12 @@ class Position(var x: Int, var y: Int) {
     fun toManhattanDistance() = abs(x) + abs(y)
 
     override fun toString() = "($x,$y)"
+
+    override fun equals(other: Any?): Boolean {
+        if (other === this) return true
+        if (other?.javaClass != javaClass) return false
+        if (other !is Position) return false
+        return other.x == x && other.y == y
+    }
+    override fun hashCode() = x.hashCode() + y.hashCode()
 }
