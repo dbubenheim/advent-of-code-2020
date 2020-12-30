@@ -5,7 +5,7 @@ import advent.of.code.day15.Day15.Companion.part2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-internal class Day15 {
+internal class Day15Test {
 
     @Test
     fun testPart1() {
