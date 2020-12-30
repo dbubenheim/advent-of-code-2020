@@ -12,7 +12,7 @@ internal class RambunctiousRecitationTest {
     @MethodSource("spokenNumber")
     fun testSpokenNumber(input: List<Long>, number: Long, spokenNumber: Long) {
         val rambunctiousRecitation = RambunctiousRecitation(input)
-        val result = rambunctiousRecitation.spokenNumber3(number)
+        val result = rambunctiousRecitation.spokenNumber(number)
         assertThat(result).isEqualTo(spokenNumber)
     }
 

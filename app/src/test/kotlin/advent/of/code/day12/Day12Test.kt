@@ -9,7 +9,7 @@ internal class Day12Test {
 
     @Test
     fun testPart1() {
-       assertThat(part1()).isEqualTo(938)
+        assertThat(part1()).isEqualTo(938)
     }
 
     @Test
