@@ -1,7 +1,7 @@
-package advent.of.code
+package advent.of.code.day01
 
-import advent.of.code.Day01.Companion.reportRepairPart1
-import advent.of.code.Day01.Companion.reportRepairPart2
+import advent.of.code.day01.Day01.Companion.reportRepairPart1
+import advent.of.code.day01.Day01.Companion.reportRepairPart2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

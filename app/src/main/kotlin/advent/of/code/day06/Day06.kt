@@ -1,5 +1,6 @@
-package advent.of.code
+package advent.of.code.day06
 
+import advent.of.code.toURL
 import java.io.File
 
 internal class Day06 {

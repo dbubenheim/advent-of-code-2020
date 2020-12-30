@@ -1,8 +1,8 @@
-package advent.of.code
+package advent.of.code.day10
 
-import advent.of.code.Day10.Companion.part1
-import advent.of.code.Day10.Companion.part1Functional
-import advent.of.code.Day10.Companion.part2
+import advent.of.code.day10.Day10.Companion.part1
+import advent.of.code.day10.Day10.Companion.part1Functional
+import advent.of.code.day10.Day10.Companion.part2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

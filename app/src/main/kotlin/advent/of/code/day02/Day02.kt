@@ -1,4 +1,4 @@
-package advent.of.code
+package advent.of.code.day02
 
 class Day02 {
 

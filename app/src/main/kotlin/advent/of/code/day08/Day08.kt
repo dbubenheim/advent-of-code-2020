@@ -1,6 +1,6 @@
-package advent.of.code
+package advent.of.code.day08
 
-import advent.of.code.Day08.*
+import advent.of.code.toURL
 import java.io.File
 
 class Day08 {
@@ -110,7 +110,7 @@ class Day08 {
     }
 }
 
-private fun String.toInstruction(): Instruction {
+private fun String.toInstruction(): Day08.Instruction {
     val split = this.split(" ")
-    return Instruction(Operation.valueOf(split[0].toUpperCase()), split[1].toInt())
+    return Day08.Instruction(Day08.Operation.valueOf(split[0].toUpperCase()), split[1].toInt())
 }

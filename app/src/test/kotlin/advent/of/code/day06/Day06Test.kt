@@ -1,7 +1,7 @@
-package advent.of.code
+package advent.of.code.day06
 
-import advent.of.code.Day06.Companion.customCustomsPart1
-import advent.of.code.Day06.Companion.customCustomsPart2
+import advent.of.code.day06.Day06.Companion.customCustomsPart1
+import advent.of.code.day06.Day06.Companion.customCustomsPart2
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
