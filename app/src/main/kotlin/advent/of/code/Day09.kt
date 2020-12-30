@@ -27,7 +27,7 @@ internal class Day09 {
                 contiguousNumbers.add(numbers[index])
                 val sum = contiguousNumbers.sum()
                 if (sum == number)
-                    return ((contiguousNumbers.max() ?: 0L) + (contiguousNumbers.min() ?: 0L))
+                    return ((contiguousNumbers.maxOrNull() ?: 0L) + (contiguousNumbers.minOrNull() ?: 0L))
                 if (sum > number) {
                     contiguousNumbers.clear()
                     index = ++currentStart
