@@ -25,12 +25,12 @@ internal class RambunctiousRecitation(private val input: List<Long>) {
                 }
             }
 
-            update2(spokenNumber, turn)
+            update(spokenNumber, turn)
         }
         return spokenNumber
     }
 
-    private fun update2(spokenNumber: Long, turn: Long) {
+    private fun update(spokenNumber: Long, turn: Long) {
         lastTurns.putIfAbsent(spokenNumber, LongArray(2) { -1 })
         val turns = lastTurns[spokenNumber]
         turns?.set(0, turns[1])
