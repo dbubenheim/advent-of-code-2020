@@ -3,7 +3,7 @@ package advent.of.code.day16
 import java.lang.IllegalArgumentException
 
 internal fun List<String>.toNearbyTickets(): List<Ticket> {
-    if (first().trim() != "nearby tickets:") throw IllegalArgumentException("tickets nearby are not parseable!")
+    if (first().trim() != "nearby tickets:") throw IllegalArgumentException("tickets nearby are not parsable!")
     return drop(1)
         .map { line -> line.toNearbyTicket() }
 }
@@ -14,12 +14,12 @@ internal fun String.toNearbyTicket(): Ticket {
 
 internal fun String.toTicket() : Ticket {
     val values = split(',')
-        .map { field -> field.toInt() }
+        .map { field -> FieldValue(Field("TODO"), field.toInt()) }
     return Ticket(values)
 }
 
 internal fun List<String>.toYourTicket(): Ticket {
-    if (first().trim() != "your ticket:") throw IllegalArgumentException("your ticket not parseable!")
+    if (first().trim() != "your ticket:") throw IllegalArgumentException("your ticket not parsable!")
     return last().toTicket()
 }
 
