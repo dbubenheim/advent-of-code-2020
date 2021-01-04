@@ -15,7 +15,7 @@ internal class Day16 {
             //println("rules: $rules")
 
             val yourTicket = yourTicket(lines)
-            //println("yourTicket: $yourTicket")
+            println("yourTicket: $yourTicket")
 
             val nearbyTickets = nearbyTickets(lines)
             //println("nearbyTickets: $nearbyTickets")
@@ -29,7 +29,7 @@ internal class Day16 {
         }
 
         @JvmStatic
-        fun part2(): Int {
+        fun part2(): Long {
             val lines = File("day16/input-day16.txt".toURL()).readLines()
 
             val rules = rules(lines)
@@ -47,10 +47,64 @@ internal class Day16 {
             }
             //println("validTickets: $validTickets")
 
-
             // "field" -> [0, 4, 23] valid positions
-            val validPositions = mutableMapOf<Field, MutableSet<Int>>()
+            val fieldPositions = findAllValidFieldPositions(rules, validTickets)
+            println("validPositions (all): $fieldPositions")
 
+            // phase 1 - solve the obvious positions
+            solveObviousFieldPositions(fieldPositions)
+            println("validPositions (phase 1): $fieldPositions")
+
+            // phase 2 - solve the more complex ones
+            solveComplexFieldPositions(fieldPositions)
+            println("validPositions (phase 2): $fieldPositions")
+
+            yourTicket.updateFieldPositions(fieldPositions.map { Pair(it.key, it.value.first()) })
+            println("yourTicket: $yourTicket")
+
+            return yourTicket.departureProduct()
+        }
+
+        private fun solveComplexFieldPositions(fieldPositions: List<MutableMap.MutableEntry<Field, MutableSet<Int>>>) {
+            if (fieldPositions.any { it.value.size > 1 }) {
+                val unsolved = fieldPositions.flatMap { it.value }.toMutableSet()
+                while (unsolved.isNotEmpty()) {
+                    for (position in unsolved) {
+                        //println("position: $position")
+                        var count = 0
+                        //if (position)
+                        for (entry in fieldPositions) {
+                            //if (entry.value.size == 1) continue
+                            if (entry.value.contains(position)) count++
+                        }
+                        //println("count: $count")
+                        if (count == 1) {
+                            for (entry in fieldPositions) {
+                                entry.value.removeIf { it != position }
+                            }
+                            unsolved.remove(position)
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun solveObviousFieldPositions(fieldPositions: List<MutableMap.MutableEntry<Field, MutableSet<Int>>>) {
+            val takenPositions = mutableSetOf<Int>()
+            for (entry in fieldPositions) {
+                entry.value.removeAll(takenPositions)
+                if (entry.value.size == 1) {
+                    takenPositions.add(entry.value.first())
+                }
+            }
+        }
+
+        private fun findAllValidFieldPositions(
+            rules: List<Rule>,
+            validTickets: List<Ticket>
+        ): List<MutableMap.MutableEntry<Field, MutableSet<Int>>> {
+
+            val validPositions = mutableMapOf<Field, MutableSet<Int>>()
             for (rule in rules) {
                 val ranges = rule.ranges.flatten()
                 val field = rule.field
@@ -68,49 +122,7 @@ internal class Day16 {
                     }
                 }
             }
-            println("validPositions (all): ${validPositions.toList().sortedBy { it.second.size }.toMap()}")
-
-            // phase 1 - solve the obvious positions
-            val sortedValidPositions = validPositions.entries.sortedBy { it.value.size }
-            val takenPositions = mutableSetOf<Int>()
-            for (entry in sortedValidPositions) {
-                entry.value.removeAll(takenPositions)
-                if (entry.value.size == 1) {
-                    takenPositions.add(entry.value.first())
-                }
-//                else {
-//                    throw IllegalStateException("WTF: ${entry.key} - ${entry.value}")
-//                }
-            }
-            println("validPositions (phase 1): $sortedValidPositions")
-
-            // phase 2 - solve the more complex ones
-            if (sortedValidPositions.any { it.value.size > 1 }) {
-                val unsolved = sortedValidPositions.flatMap { it.value }.toMutableSet()
-                while (unsolved.isNotEmpty()) {
-                    for (position in unsolved) {
-                        //println("position: $position")
-                        var count = 0
-                        //if (position)
-                        for (entry in sortedValidPositions) {
-                            //if (entry.value.size == 1) continue
-                            if (entry.value.contains(position)) count++
-                        }
-                        //println("count: $count")
-                        if (count == 1) {
-                            for (entry in sortedValidPositions) {
-                                entry.value.removeIf { it != position }
-                            }
-                            unsolved.remove(position)
-                        }
-                    }
-                }
-            }
-            println("validPositions (phase 2): $sortedValidPositions")
-
-            //findFields(validTickets, rules)
-
-            return 0
+            return validPositions.entries.sortedBy { it.value.size }
         }
 
         private fun nearbyTickets(lines: List<String>): List<Ticket> {

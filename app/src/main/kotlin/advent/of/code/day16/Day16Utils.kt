@@ -14,7 +14,7 @@ internal fun String.toNearbyTicket(): Ticket {
 
 internal fun String.toTicket() : Ticket {
     val values = split(',')
-        .map { field -> FieldValue(Field("TODO"), field.toInt()) }
+        .map { field -> FieldValue(Field(), field.toInt()) }
     return Ticket(values)
 }
 

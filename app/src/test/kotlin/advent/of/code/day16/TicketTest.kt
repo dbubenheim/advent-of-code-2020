@@ -29,8 +29,8 @@ internal class TicketTest {
 
     @ParameterizedTest
     @MethodSource("dataForTestDepartureProduct")
-    fun testDepartureProduct(rules: List<Rule>, tickets: Ticket, departureProduct: Int) {
-        assertThat(tickets.departureProduct()).isEqualTo(departureProduct)
+    fun testDepartureProduct(ticket: Ticket, departureProduct: Long) {
+        assertThat(ticket.departureProduct()).isEqualTo(departureProduct)
     }
 
     companion object {
@@ -138,6 +138,40 @@ internal class TicketTest {
                         "38,6,12".toNearbyTicket()
                     ),
                     12
+                )
+            )
+        }
+
+        @JvmStatic
+        fun dataForTestDepartureProduct(): Stream<Arguments> {
+
+            return Stream.of(
+                Arguments.of(
+                    Ticket(
+                        values = listOf(
+                            FieldValue(field = Field(name = "class", position = 0), value = 151),
+                            FieldValue(field = Field(name = "type", position = 1), value = 71),
+                            FieldValue(field = Field(name = "route", position = 2), value = 67),
+                            FieldValue(field = Field(name = "departure station", position = 3), value = 113),
+                            FieldValue(field = Field(name = "arrival track", position = 4), value = 127),
+                            FieldValue(field = Field(name = "train", position = 5), value = 163),
+                            FieldValue(field = Field(name = "departure date", position = 6), value = 131),
+                            FieldValue(field = Field(name = "price", position = 7), value = 59),
+                            FieldValue(field = Field(name = "arrival location", position = 8), value = 137),
+                            FieldValue(field = Field(name = "row", position = 9), value = 103),
+                            FieldValue(field = Field(name = "duration", position = 10), value = 73),
+                            FieldValue(field = Field(name = "arrival platform", position = 11), value = 139),
+                            FieldValue(field = Field(name = "zone", position = 12), value = 107),
+                            FieldValue(field = Field(name = "departure platform", position = 13), value = 101),
+                            FieldValue(field = Field(name = "departure location", position = 14), value = 97),
+                            FieldValue(field = Field(name = "departure track", position = 15), value = 149),
+                            FieldValue(field = Field(name = "arrival station", position = 16), value = 157),
+                            FieldValue(field = Field(name = "seat", position = 17), value = 53),
+                            FieldValue(field = Field(name = "departure time", position = 18), value = 109),
+                            FieldValue(field = Field(name = "wagon", position = 19), value = 61)
+                        )
+                    ),
+                    2355350878831
                 )
             )
         }
