@@ -9,31 +9,37 @@ class Day01 {
 
         @JvmStatic
         fun reportRepairPart1(): Int {
-            val lines = File("day01/input-day01.txt".toURL()).readLines()
-            lines.forEach { line1 ->
-                val i = line1.toInt()
-                lines.forEach { line2 ->
-                    val j = line2.toInt()
-                    if (i + j == 2020) {
-                        return  i * j
-                    }
+            val values = File("day01/input-day01.txt".toURL()).readLines().map { it.toInt() }
+            val storage = mutableSetOf<Int>()
+            var counter = 0
+            values.forEach { value ->
+                val diff = 2020 - value
+                if (storage.contains(diff)) {
+                    println("counter: $counter")
+                    return value * diff
                 }
+                storage.add(value)
+                counter++
             }
             return -1
         }
 
         @JvmStatic
         fun reportRepairPart2(): Int {
-            val lines = File("day01/input-day01.txt".toURL()).readLines()
-            lines.forEach { line1 ->
-                val i = line1.toInt()
-                lines.forEach { line2 ->
-                    val j = line2.toInt()
-                    lines.forEach { line3 ->
-                        val k = line3.toInt()
-                        if (i + j + k == 2020) return i * j * k
+            val values = File("day01/input-day01.txt".toURL()).readLines().map { it.toInt() }
+            val memory = mutableSetOf<Int>()
+            var counter = 0
+            values.forEach { value1 ->
+                values.forEach { value2 ->
+                    val diff = 2020 - value1 - value2
+                    if (memory.contains(diff)) {
+                        println("counter: $counter")
+                        return value1 * value2 * diff
                     }
+                    memory.add(value2)
+                    counter++
                 }
+                counter++
             }
             return -1
         }
