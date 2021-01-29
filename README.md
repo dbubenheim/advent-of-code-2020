@@ -16,9 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-```
-Give examples
-```
+- JDK
 
 ### Installing
 
@@ -52,9 +50,8 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 
 ...
 
-131 tests completed, 0 failed
-
-> Task :app:test SUCCESS
+BUILD SUCCESSFUL in 1m 44s
+5 actionable tasks: 5 executed
 ```
 
 ### Break down into end to end tests
