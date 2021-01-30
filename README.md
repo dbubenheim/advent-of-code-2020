@@ -4,7 +4,6 @@
 ![Travis (.org)](https://img.shields.io/travis/dbubenheim/advent-of-code-2020?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/dbubenheim/advent-of-code-2020?label=license&style=for-the-badge)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dbubenheim/advent-of-code-2020?style=for-the-badge)
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/dbubenheim/advent-of-code-2020?style=for-the-badge)
 ![GitHub top language](https://img.shields.io/github/languages/top/dbubenheim/advent-of-code-2020?style=for-the-badge)
 ![GitHub search hit counter](https://img.shields.io/github/search/dbubenheim/advent-of-code-2020/goto?style=for-the-badge)
 
@@ -16,29 +15,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-- JDK
+- JDK 8 or later
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+You can setup the project into an IDE by importing the folder. The following command shows how to do it in IntelliJ IDEA.
 
 ```
-Give the example
+idea advent-of-code-2020
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+You can easily run the automated tests of this project by the shipped gradle wrapper
 
 ```
 ❯ ./gradlew clean test
@@ -54,20 +43,54 @@ BUILD SUCCESSFUL in 1m 44s
 5 actionable tasks: 5 executed
 ```
 
-### Break down into end to end tests
+### Break down into tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+There are unit tests for all of the solved days. Each one is in a separate package located under `src/test/kotlin`.
 
 ```
-Give an example
+── test
+    ├── kotlin
+    │   └── advent
+    │       └── of
+    │           └── code
+    │               ├── day01
+    │               │   └── Day01Test.kt
+    │               ├── day02
+    │               │   └── Day02Test.kt
+    │               ├── day03
+    │               │   └── Day03Test.kt
+    │               ├── day04
+    │               │   └── Day04Test.kt
+    │               ├── day05
+    │               │   └── Day05Test.kt
+    │               ├── day06
+    │               │   └── Day06Test.kt
+    │               ├── day07
+    │               │   └── Day07Test.kt
+    │               ├── day08
+    │               │   └── Day08Test.kt
+    │               ├── day09
+    │               │   └── Day09Test.kt
+    │               ├── day10
+    │               │   └── Day10Test.kt
+    │               ├── day11
+    │               │   ├── Day11Test.kt
+    │               │   └── SeatLayoutPart2Test.kt
+    │               ├── day12
+    │               │   ├── Day12Test.kt
+    │               │   ├── ShipPart1Test.kt
+    │               │   └── ShipPart2Test.kt
+    │               ├── day13
+    │               │   ├── Day13Test.kt
+    │               │   └── SchedulerTest.kt
+    │               ├── day15
+    │               │   ├── Day15Test.kt
+    │               │   └── RambunctiousRecitationTest.kt
+    │               ├── day16
+    │               │   ├── Day16Test.kt
+    │               │   └── TicketTest.kt
+    │               ├── day17
+    │               │   └── Day17Test.kt
 ```
 
 ## Built With
