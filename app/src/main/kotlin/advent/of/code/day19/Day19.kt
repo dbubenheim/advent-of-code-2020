@@ -3,7 +3,7 @@ package advent.of.code.day19
 import advent.of.code.toURL
 import java.io.File
 
-class Day19 {
+internal class Day19 {
 
     companion object {
 
