@@ -26,7 +26,7 @@ internal class Day19 {
         }
 
         @JvmStatic
-        fun part2() : Int {
+        fun part2(): Int {
             val input = File("day19/input-day19.txt".toURL()).readLines()
             println("input: $input")
 
@@ -40,16 +40,14 @@ internal class Day19 {
         }
 
         private fun regex(rules: List<Rule>): Regex {
-            //println("regex($rules)")
             val literal = StringBuilder()
-            literal.append("^")
+            literal.append('^')
             ruleToRegex(rules.first(), literal, rules)
-            literal.append("$")
+            literal.append('$')
             return literal.toString().toRegex()
         }
 
         private fun ruleToRegex(rule: Rule, literal: StringBuilder, input: List<Rule>) {
-            //println("ruleToRegex($rule, $literal)")
             when {
                 rule.regex != null -> literal.append(rule.regex)
                 rule.ruleSets.isNotEmpty() -> {
@@ -64,8 +62,6 @@ internal class Day19 {
                         if (moreThanOne && isLast) literal.append(')')
                     }
                 }
-                //rule.ruleSets.isEmpty() -> println("EMPTY: $rule")
-                //else -> println("WTF: $rule")
             }
         }
 
