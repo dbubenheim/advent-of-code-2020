@@ -14,7 +14,7 @@ dependencies {
 
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("com.google.guava:guava:29.0-jre")
+    implementation("com.google.guava:guava:31.1-jre")
 
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
