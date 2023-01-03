@@ -2,6 +2,7 @@ package advent.of.code.day08
 
 import advent.of.code.toURL
 import java.io.File
+import java.util.*
 
 class Day08 {
     
@@ -112,5 +113,5 @@ class Day08 {
 
 private fun String.toInstruction(): Day08.Instruction {
     val split = this.split(" ")
-    return Day08.Instruction(Day08.Operation.valueOf(split[0].toUpperCase()), split[1].toInt())
+    return Day08.Instruction(Day08.Operation.valueOf(split[0].uppercase(Locale.getDefault())), split[1].toInt())
 }

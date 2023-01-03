@@ -23,7 +23,7 @@ internal class Day06 {
             }
             m[group] = questions
             println(m)
-            return m.values.sumBy { it.size }
+            return m.values.sumOf { it.size }
         }
 
         @JvmStatic
@@ -50,7 +50,7 @@ internal class Day06 {
             }
             m[group] = questions
             println(m)
-            return m.values.sumBy { it.size }
+            return m.values.sumOf { it.size }
         }
 
         @JvmStatic

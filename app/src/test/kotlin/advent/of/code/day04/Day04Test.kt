@@ -1,9 +1,6 @@
 package advent.of.code.day04
 
-import advent.of.code.Day04.Companion.passportProcessing
-import advent.of.code.ValidatorPart1
-import advent.of.code.ValidatorPart2
-import advent.of.code.day03.Day03
+import advent.of.code.day04.Day04.Companion.passportProcessing
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

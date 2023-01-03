@@ -1,7 +1,12 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.JavaVersion.VERSION_19
 
 plugins {
     kotlin("jvm") version "1.8.0"
+}
+
+configure<JavaPluginExtension> {
+    sourceCompatibility = VERSION_19
+    targetCompatibility = VERSION_19
 }
 
 repositories {
@@ -11,10 +16,8 @@ repositories {
 dependencies {
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
     implementation(kotlin("stdlib-jdk8"))
-
-    implementation("com.google.guava:guava:29.0-jre")
+    implementation("com.google.guava:guava:31.1-jre")
 
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -22,13 +25,15 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.23.1")
 }
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
+tasks {
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
     }
-}
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "1.8"
+    compileKotlin {
+        kotlinOptions.jvmTarget = "18"
+    }
 }

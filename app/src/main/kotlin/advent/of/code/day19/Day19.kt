@@ -27,10 +27,19 @@ internal class Day19 {
 
         @JvmStatic
         fun part2(): Int {
-            val input = File("day19/input-day19.txt".toURL()).readLines()
+            val input = File("day19/input-day19-4.txt".toURL()).readLines()
             println("input: $input")
 
-            return -1
+            val rules = rules(input)
+            println("rules: $rules")
+
+            val regex = regex(rules)
+            println("regex: $regex")
+
+            val texts = texts(input)
+            println("texts: $texts")
+
+            return texts.count { text -> regex.matches(text) }
         }
 
         @JvmStatic

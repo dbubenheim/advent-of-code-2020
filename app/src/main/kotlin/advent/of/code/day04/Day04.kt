@@ -1,5 +1,7 @@
-package advent.of.code
+package advent.of.code.day04
 
+import advent.of.code.enumContains
+import advent.of.code.toURL
 import com.google.common.base.Splitter
 import java.io.File
 
@@ -69,14 +71,14 @@ class ValidatorPart2(fields: Map<String, Any?>) : Validator {
     private val pid : String? by defaultMap // (Passport ID)
     private val cid : String? by defaultMap // (Country ID)
 
-    fun isValidByr() = byr?.toIntOrNull() in 1920..2002
-    fun isValidIyr() = iyr?.toIntOrNull()  in 2010..2020
-    fun isValidEyr() = eyr?.toIntOrNull()  in 2020..2030
-    fun isValidHcl() = hcl?.matches(Regex("#[0-9a-f]{6}")) ?: false
-    fun isValidEcl() = ecl != null && enumContains<EyeColor>(ecl)
-    fun isValidPid() = pid?.matches(Regex("[0-9a-f]{9}")) ?: false
+    private fun isValidByr() = byr?.toIntOrNull() in 1920..2002
+    private fun isValidIyr() = iyr?.toIntOrNull()  in 2010..2020
+    private fun isValidEyr() = eyr?.toIntOrNull()  in 2020..2030
+    private fun isValidHcl() = hcl?.matches(Regex("#[0-9a-f]{6}")) ?: false
+    private fun isValidEcl() = ecl != null && enumContains<EyeColor>(ecl)
+    private fun isValidPid() = pid?.matches(Regex("[0-9a-f]{9}")) ?: false
 
-    fun isValidHgt(): Boolean {
+    private fun isValidHgt(): Boolean {
         val temp = hgt ?: return false
         val unit = temp.takeLast(2)
         val height = temp.substring(0, temp.length - 2)
