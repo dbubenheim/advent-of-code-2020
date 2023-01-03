@@ -5,7 +5,6 @@
 ![GitHub](https://img.shields.io/github/license/dbubenheim/advent-of-code-2020?label=license&style=for-the-badge)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dbubenheim/advent-of-code-2020?style=for-the-badge)
 ![GitHub top language](https://img.shields.io/github/languages/top/dbubenheim/advent-of-code-2020?style=for-the-badge)
-![GitHub search hit counter](https://img.shields.io/github/search/dbubenheim/advent-of-code-2020/goto?style=for-the-badge)
 
 ## Getting Started
 
