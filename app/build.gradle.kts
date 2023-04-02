@@ -1,12 +1,11 @@
-import org.gradle.api.JavaVersion.VERSION_19
-
 plugins {
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.8.20"
 }
 
-configure<JavaPluginExtension> {
-    sourceCompatibility = VERSION_19
-    targetCompatibility = VERSION_19
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of("19"))
+    }
 }
 
 repositories {
@@ -17,11 +16,13 @@ dependencies {
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20")
+
     implementation("com.google.guava:guava:31.1-jre")
 
+    testImplementation(kotlin("test"))
     testImplementation(platform("org.junit:junit-bom:5.9.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-
     testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
@@ -31,9 +32,5 @@ tasks {
         testLogging {
             events("passed", "skipped", "failed")
         }
-    }
-
-    compileKotlin {
-        kotlinOptions.jvmTarget = "18"
     }
 }
